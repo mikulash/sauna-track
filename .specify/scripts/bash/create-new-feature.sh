@@ -295,7 +295,7 @@ else
     if [ -z "$BRANCH_NUMBER" ]; then
         HIGHEST=$(get_highest_from_specs "$SPECS_DIR")
         if [ "$HIGHEST" -eq "$MAX_FEATURE_NUMBER" ]; then
-            echo "Error: feature number must be between 0 and $MAX_FEATURE_NUMBER, got '9223372036854775808'" >&2
+            echo "Error: cannot allocate a feature number above $MAX_FEATURE_NUMBER (highest existing: $HIGHEST)" >&2
             exit 1
         fi
         BRANCH_NUMBER=$((HIGHEST + 1))
@@ -320,7 +320,7 @@ else
             BRANCH_NUMBER=$HIGHEST
             while true; do
                 if [ "$BRANCH_NUMBER" -eq "$MAX_FEATURE_NUMBER" ]; then
-                    echo "Error: feature number must be between 0 and $MAX_FEATURE_NUMBER, got '9223372036854775808'" >&2
+                    echo "Error: cannot allocate a feature number above $MAX_FEATURE_NUMBER (highest existing: $HIGHEST)" >&2
                     exit 1
                 fi
                 BRANCH_NUMBER=$((BRANCH_NUMBER + 1))
